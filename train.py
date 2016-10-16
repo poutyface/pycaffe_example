@@ -7,13 +7,14 @@ caffe.set_mode_cpu()
 
 
 #net = caffe.Net("models/train.proto", caffe.TEST)
-solver = caffe.SGDSolver("models/solver.proto")
+#solver = caffe.SGDSolver("models/solver.proto")
+solver = caffe.AdamSolver("models/solver.proto")
 net = solver.net
 
 print net.blobs["data"].data.shape
 print net.blobs["conv"].data.shape
 
-while solver.iter < 100:
+while solver.iter < 10000:
     net.blobs["data"].data[...] = np.zeros(net.blobs["data"].data.shape, dtype=np.float32)
     net.blobs["label"].data[...] = np.ones(net.blobs["conv"].data.shape, dtype=np.float32)
 
